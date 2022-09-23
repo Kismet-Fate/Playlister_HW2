@@ -19,7 +19,7 @@ body {
 
 #root {
   background-color: var(--swatch-primary);
-  font-family: serif;
+  font-family: Tangerine;
   position: absolute;
   width: 80%;
   left: 10%;
@@ -130,9 +130,24 @@ body {
   background-color: var(--swatch-complement);
 }
 
+
+.unselected-song-card:hover {
+  cursor: pointer;
+  background-color: var(--swatch-contrast);
+  color:white;
+}
+
+.unselected-song-card {
+  background-color: var(--swatch-complement);
+}
+
 .list-card-button {
   float:right;
   font-size:18pt;
+}
+.song-card-button {
+  justify-content:right;
+  float:right;
 }
 
 .playlister-button, .playlister-button-disabled {
@@ -153,11 +168,13 @@ body {
   cursor: not-allowed;
 }
 
-.playlister-song, .playlister-song-dragged-to { 
-  display:flex;
+.playlister-song, .playlister-song-dragged-to, .selected-song-card, .unselected-song-card  { 
+  text-align:left;
   align-items: center;
   font-size: 24pt;
-  height:20%;
+  margin: 10px;
+  padding: 20px;
+  border-radius: 25px;
 }
 
 input {
@@ -169,10 +186,12 @@ input {
 
 .modal {
   position: fixed;
+  margin-left:23rem;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
+  width: 50rem;
   display: flex;
   align-items: center;
   justify-content: center;
