@@ -4,7 +4,7 @@ export default class DeleteSongModal extends Component {
     render() {
         const { songKeyPair, deleteSongCallback, hideDeleteSongModalCallback } = this.props;
         let name = "";
-        console.log(songKeyPair);
+        //console.log(songKeyPair);
         if (songKeyPair) {
             name = songKeyPair.song.title;
         }

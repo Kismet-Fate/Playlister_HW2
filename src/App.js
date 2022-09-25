@@ -147,7 +147,14 @@ class App extends React.Component {
     editSong = (key) => {
         //console.log(key);
         let newCurrentList = this.state.currentList;
-        newCurrentList.songs.splice(key-1, 1)
+        let old = {"title":this.state.songKeyPairMarkedForDeletion.song.title ,
+                    "artist" : this.state.songKeyPairMarkedForDeletion.song.artist,
+                    "youTubeId": this.state.songKeyPairMarkedForDeletion.song.youTubeId};
+        let n = {"title":document.getElementById("tid").value,
+                 "artist" : document.getElementById("atid").value,
+                 "youTubeId": document.getElementById("ytid").value};
+        console.log(old);
+        newCurrentList.songs.splice(key-1, 1, n);
         this.setState(prevState => ({
             listKeyPairMarkedForDeletion : prevState.listKeyPairMarkedForDeletion,
             songKeyPairMarkedForDeletion : prevState.songKeyPairMarkedForDeletion,
@@ -399,6 +406,7 @@ class App extends React.Component {
                     currentList={this.state.currentList}
                     moveSongCallback={this.addMoveSongTransaction} 
                     deleteSongCallback={this.markSongForDeletion}
+                    editSongCallback={this.markSongForEdit}
                     />
                 <Statusbar 
                     currentList={this.state.currentList} />

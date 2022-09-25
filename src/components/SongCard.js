@@ -67,7 +67,7 @@ export default class SongCard extends React.Component {
             draggedTo: prevState.draggedTo
         }));
         event.stopPropagation();
-        let keySongPair = {key: this.getItemNum(), song: this.props.song}
+        let keySongPair = {key: this.getItemNum(), song: this.props.song};
         this.props.deleteSongCallback(keySongPair);
     }
     handleEditSong = (event) => {
@@ -77,7 +77,10 @@ export default class SongCard extends React.Component {
             draggedTo: prevState.draggedTo
         }));
         event.stopPropagation();
-        this.props.editSongCallback(this.props.keyNamePair);
+        
+        let keySongPair = {key: this.getItemNum(), song: this.props.song};
+        //console.log(keySongPair);
+        this.props.editSongCallback(keySongPair);
     }
 
     handleClick = (event) => {

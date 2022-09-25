@@ -1,12 +1,19 @@
 import React, { Component } from 'react';
 
 export default class EditSongModal extends Component {
+    
     render() {
-        const { listKeyPair, editSongCallback, hideEditSongModalCallback } = this.props;
-        let name = "";
-        if (listKeyPair) {
-            name = listKeyPair.name;
+        const { songKeyPair, editSongCallback, hideEditSongModalCallback } = this.props;
+        let title = "";
+        let artist = "";
+        let ytlink = "";
+        if (songKeyPair) {
+            title = songKeyPair.song.title;
+            artist = songKeyPair.song.artist;
+            ytlink = songKeyPair.song.youTubeId;
         }
+
+        console.log(songKeyPair);
         return (
             <div 
                 class="modal" 
@@ -16,10 +23,17 @@ export default class EditSongModal extends Component {
                         <div class="modal-north">
                             Edit Song
                         </div>
-                        <div class="modal-center">
-                            <div class="modal-center-content">
-                                Are you sure you wish to permanently delete the {name} playlist?
-                            </div>
+                        <div className="margin-bottom:-1rem; padding-top: 0rem; padding-bottom: 0rem;">
+                            <p className="font-weight:bold; display:inline-block; font-size:1.7rem"> Title: </p>
+                            <input id = "tid" className="margin-left:64px;" defaultValue={title}></input>
+                        </div>
+                        <div className="margin-bottom:-1rem; margin-top:-1rem; padding-top: 0rem; padding-bottom: 0rem;">
+                            <p className="font-weight:bold; display:inline-block; font-size:1.7rem;"> Artist: </p>
+                            <input id = "atid" className="margin-left:48px;" defaultValue={artist}></input>
+                        </div>
+                        <div className="margin-top:-1rem; padding-top: 0rem; padding-bottom: 0rem;">
+                            <p className="font-weight:bold; display:inline-block; font-size:1.7rem"> Youtube Id </p>
+                            <input id = "ytid" className="margin-left:1rem;" defaultValue={ytlink}></input>
                         </div>
                         <div class="modal-south">
                             <input type="button" 
