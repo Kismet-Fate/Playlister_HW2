@@ -131,10 +131,27 @@ class App extends React.Component {
     }
 
     deleteSong = (key) => {
+        //console.log(key);
+        let newCurrentList = this.state.currentList;
+        newCurrentList.songs.splice(key-1, 1)
         this.setState(prevState => ({
             listKeyPairMarkedForDeletion : prevState.listKeyPairMarkedForDeletion,
             songKeyPairMarkedForDeletion : prevState.songKeyPairMarkedForDeletion,
-            currentList: prevState.currentList.songs.splice(key, 1),
+            currentList: newCurrentList,
+            sessionData: prevState.sessionData
+        }), () => {
+
+        });
+    }
+
+    editSong = (key) => {
+        //console.log(key);
+        let newCurrentList = this.state.currentList;
+        newCurrentList.songs.splice(key-1, 1)
+        this.setState(prevState => ({
+            listKeyPairMarkedForDeletion : prevState.listKeyPairMarkedForDeletion,
+            songKeyPairMarkedForDeletion : prevState.songKeyPairMarkedForDeletion,
+            currentList: newCurrentList,
             sessionData: prevState.sessionData
         }), () => {
 
@@ -149,10 +166,19 @@ class App extends React.Component {
         this.deleteSong(this.state.songKeyPairMarkedForDeletion.key);
         this.hideDeleteSongModal();
     }
+    editMarkedSong = () => {
+        this.editSong(this.state.songKeyPairMarkedForDeletion.key);
+        this.hideEditSongModal();
+    }
     // THIS FUNCTION SPECIFICALLY DELETES THE CURRENT LIST
     deleteCurrentList = () => {
         if (this.state.currentList) {
             this.deleteList(this.state.currentList.key);
+        }
+    }
+    editCurrentList = () => {
+        if (this.state.currentList) {
+            this.editList(this.state.currentList.key);
         }
     }
     renameList = (key, newName) => {
@@ -290,7 +316,7 @@ class App extends React.Component {
         });
     }
     markSongForDeletion = (keyPair) => {
-        console.log(keyPair);
+        //console.log(keyPair);
         this.setState(prevState => ({
             currentList: prevState.currentList,
             songKeyPairMarkedForDeletion : keyPair,
@@ -299,6 +325,18 @@ class App extends React.Component {
         }), () => {
             // PROMPT THE USER
             this.showDeleteSongModal();
+        });
+    }
+    markSongForEdit = (keyPair) => {
+        //console.log(keyPair);
+        this.setState(prevState => ({
+            currentList: prevState.currentList,
+            songKeyPairMarkedForDeletion : keyPair,
+            listKeyPairMarkedForDeletion : prevState.listKeyPairMarkedForDeletion,
+            sessionData: prevState.sessionData
+        }), () => {
+            // PROMPT THE USER
+            this.showEditSongModal();
         });
     }
     // THIS FUNCTION SHOWS THE MODAL FOR PROMPTING THE USER
@@ -319,6 +357,15 @@ class App extends React.Component {
     // THIS FUNCTION IS FOR HIDING THE MODAL
     hideDeleteSongModal() {
         let modal = document.getElementById("delete-song-modal");
+        modal.classList.remove("is-visible");
+    }
+    showEditSongModal() {
+        let modal = document.getElementById("edit-song-modal");
+        modal.classList.add("is-visible");
+    }
+    // THIS FUNCTION IS FOR HIDING THE MODAL
+    hideEditSongModal() {
+        let modal = document.getElementById("edit-song-modal");
         modal.classList.remove("is-visible");
     }
     render() {

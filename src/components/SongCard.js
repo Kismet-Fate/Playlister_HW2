@@ -61,11 +61,21 @@ export default class SongCard extends React.Component {
     }
 
     handleDeleteSong = (event) => {
+        this.setState(prevState => ({
+            n: this.props.song,
+            isDragging: prevState.isDragging,
+            draggedTo: prevState.draggedTo
+        }));
         event.stopPropagation();
         let keySongPair = {key: this.getItemNum(), song: this.props.song}
         this.props.deleteSongCallback(keySongPair);
     }
     handleEditSong = (event) => {
+        this.setState(prevState => ({
+            n: this.props.song,
+            isDragging: prevState.isDragging,
+            draggedTo: prevState.draggedTo
+        }));
         event.stopPropagation();
         this.props.editSongCallback(this.props.keyNamePair);
     }
