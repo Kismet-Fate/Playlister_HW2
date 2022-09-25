@@ -376,6 +376,18 @@ class App extends React.Component {
         let modal = document.getElementById("edit-song-modal");
         modal.classList.remove("is-visible");
     }
+    addSong = (song, index) =>{
+        let newCurrentList = this.state.currentList;
+        newCurrentList.songs.splice(index, 0, song)
+        this.setState(prevState => ({
+            currentList: newCurrentList,
+            songKeyPairMarkedForDeletion : prevState.songKeyPairMarkedForDeletion,
+            listKeyPairMarkedForDeletion : prevState.listKeyPairMarkedForDeletion,
+            sessionData: prevState.sessionData
+        }), () => {
+            this.db.mutationUpdateList(this.state.currentList);
+        });
+    }
     addDefaultSong = () =>{
         let newCurrentList = this.state.currentList;
         newCurrentList.songs.push({
