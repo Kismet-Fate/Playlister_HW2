@@ -140,7 +140,7 @@ class App extends React.Component {
             currentList: newCurrentList,
             sessionData: prevState.sessionData
         }), () => {
-
+            
         });
     }
 
@@ -372,6 +372,7 @@ class App extends React.Component {
     }
     // THIS FUNCTION IS FOR HIDING THE MODAL
     hideEditSongModal() {
+        
         let modal = document.getElementById("edit-song-modal");
         modal.classList.remove("is-visible");
     }
