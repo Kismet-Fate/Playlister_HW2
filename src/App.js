@@ -113,6 +113,7 @@ class App extends React.Component {
         // AND FROM OUR APP STATE
         this.setState(prevState => ({
             listKeyPairMarkedForDeletion : null,
+            songKeyPairMarkedForDeletion : prevState.songKeyPairMarkedForDeletion,
             currentList: newCurrentList,
             sessionData: {
                 nextKey: prevState.sessionData.nextKey,
@@ -173,6 +174,7 @@ class App extends React.Component {
 
         this.setState(prevState => ({
             listKeyPairMarkedForDeletion : null,
+            songKeyPairMarkedForDeletion : prevState.songKeyPairMarkedForDeletion,
             sessionData: {
                 nextKey: prevState.sessionData.nextKey,
                 counter: prevState.sessionData.counter,
@@ -192,6 +194,7 @@ class App extends React.Component {
         let newCurrentList = this.db.queryGetList(key);
         this.setState(prevState => ({
             listKeyPairMarkedForDeletion : prevState.listKeyPairMarkedForDeletion,
+            songKeyPairMarkedForDeletion : prevState.songKeyPairMarkedForDeletion,
             currentList: newCurrentList,
             sessionData: this.state.sessionData
         }), () => {
@@ -204,6 +207,7 @@ class App extends React.Component {
     closeCurrentList = () => {
         this.setState(prevState => ({
             listKeyPairMarkedForDeletion : prevState.listKeyPairMarkedForDeletion,
+            songKeyPairMarkedForDeletion : prevState.songKeyPairMarkedForDeletion,
             currentList: null,
             sessionData: this.state.sessionData
         }), () => {
@@ -215,6 +219,7 @@ class App extends React.Component {
     setStateWithUpdatedList(list) {
         this.setState(prevState => ({
             listKeyPairMarkedForDeletion : prevState.listKeyPairMarkedForDeletion,
+            songKeyPairMarkedForDeletion : prevState.songKeyPairMarkedForDeletion,
             currentList : list,
             sessionData : this.state.sessionData
         }), () => {
@@ -288,7 +293,7 @@ class App extends React.Component {
         this.setState(prevState => ({
             currentList: prevState.currentList,
             songKeyPairMarkedForDeletion : keyPair,
-            listKeyPairMarkedForDeletion : null,
+            listKeyPairMarkedForDeletion : prevState.listKeyPairMarkedForDeletion,
             sessionData: prevState.sessionData
         }), () => {
             // PROMPT THE USER

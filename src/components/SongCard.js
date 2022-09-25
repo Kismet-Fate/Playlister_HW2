@@ -5,6 +5,7 @@ export default class SongCard extends React.Component {
         super(props);
 
         this.state = {
+            n: null,
             isDragging: false,
             draggedTo: false
         }
@@ -12,6 +13,7 @@ export default class SongCard extends React.Component {
     handleDragStart = (event) => {
         event.dataTransfer.setData("song", event.target.id);
         this.setState(prevState => ({
+            n: prevState.n,
             isDragging: true,
             draggedTo: prevState.draggedTo
         }));
@@ -19,6 +21,7 @@ export default class SongCard extends React.Component {
     handleDragOver = (event) => {
         event.preventDefault();
         this.setState(prevState => ({
+            n: prevState.n,
             isDragging: prevState.isDragging,
             draggedTo: true
         }));
@@ -26,6 +29,7 @@ export default class SongCard extends React.Component {
     handleDragEnter = (event) => {
         event.preventDefault();
         this.setState(prevState => ({
+            n: prevState.n,
             isDragging: prevState.isDragging,
             draggedTo: true
         }));
@@ -33,6 +37,7 @@ export default class SongCard extends React.Component {
     handleDragLeave = (event) => {
         event.preventDefault();
         this.setState(prevState => ({
+            n: prevState.n,
             isDragging: prevState.isDragging,
             draggedTo: false
         }));
@@ -46,6 +51,7 @@ export default class SongCard extends React.Component {
         sourceId = sourceId.substring(sourceId.indexOf("-") + 1);
         
         this.setState(prevState => ({
+            n: prevState.n,
             isDragging: false,
             draggedTo: false
         }));
@@ -55,6 +61,11 @@ export default class SongCard extends React.Component {
     }
 
     handleDeleteSong = (event) => {
+        this.setState(prevState => ({
+            n: this.getItemNum(),
+            isDragging: prevState.isDragging,
+            draggedTo: prevState.draggedTo
+        }));
         event.stopPropagation();
         this.props.deleteSongCallback(this.props.keyNamePair);
     }
