@@ -24,7 +24,7 @@ export default class EditSongModal extends Component {
                             Edit Song
                         </div>
                         <div className="margin-bottom:-1rem; padding-top: 0rem; padding-bottom: 0rem;">
-                            <p className="font-weight:bold; display:inline-block; font-size:1.7rem"> Title: </p>
+                            <p className="font-weight:bold; display:inline-block; font-size:3rem"> Title: </p>
                             <input id = "tid" className="margin-left:64px;" defaultValue={title}></input>
                         </div>
                         <div className="margin-bottom:-1rem; margin-top:-1rem; padding-top: 0rem; padding-bottom: 0rem;">

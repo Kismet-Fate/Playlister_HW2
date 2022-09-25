@@ -376,6 +376,22 @@ class App extends React.Component {
         let modal = document.getElementById("edit-song-modal");
         modal.classList.remove("is-visible");
     }
+    addDefaultSong = () =>{
+        let newCurrentList = this.state.currentList;
+        newCurrentList.songs.push({
+            "title": "Untitled",
+            "artist": "Unknown",
+            "youTubeId": "dQw4w9WgXcQ"
+        })
+        this.setState(prevState => ({
+            currentList: newCurrentList,
+            songKeyPairMarkedForDeletion : prevState.songKeyPairMarkedForDeletion,
+            listKeyPairMarkedForDeletion : prevState.listKeyPairMarkedForDeletion,
+            sessionData: prevState.sessionData
+        }), () => {
+
+        });
+    }
     render() {
         let canAddSong = this.state.currentList !== null;
         let canUndo = this.tps.hasTransactionToUndo();
@@ -402,6 +418,7 @@ class App extends React.Component {
                     undoCallback={this.undo}
                     redoCallback={this.redo}
                     closeCallback={this.closeCurrentList}
+                    addSongCallback={this.addDefaultSong}
                 />
                 <PlaylistCards
                     currentList={this.state.currentList}
