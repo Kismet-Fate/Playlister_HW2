@@ -6,7 +6,10 @@ import DBManager from './db/DBManager';
 import jsTPS from './common/jsTPS.js';
 
 // OUR TRANSACTIONS
+import AddSong_Transaction from './transactions/AddSong_Transaction.js';
+//import EditSong_Transaction from './transactions/EditSong_Transaction.js';
 import MoveSong_Transaction from './transactions/MoveSong_Transaction.js';
+//import RemoveSong_Transaction from './transactions/RemoveSong_Transaction.js';
 
 // THESE REACT COMPONENTS ARE MODALS
 import DeleteListModal from './components/DeleteListModal.js';
@@ -291,6 +294,18 @@ class App extends React.Component {
     // THIS FUNCTION ADDS A MoveSong_Transaction TO THE TRANSACTION STACK
     addMoveSongTransaction = (start, end) => {
         let transaction = new MoveSong_Transaction(this, start, end);
+        this.tps.addTransaction(transaction);
+    }
+    addAddSongTransaction(song, index) {
+        let transaction = new AddSong_Transaction(this, song, index);
+        this.tps.addTransaction(transaction);
+    }
+    addEditSongTransaction(song1, song2, index) {
+        let transaction = new EditSong_Transaction(this, song1, song2, index);
+        this.tps.addTransaction(transaction);
+    }
+    addRemoveSongTransaction(song, index) {
+        let transaction = new RemoveSong_Transaction(this, song, index);
         this.tps.addTransaction(transaction);
     }
     // THIS FUNCTION BEGINS THE PROCESS OF PERFORMING AN UNDO
