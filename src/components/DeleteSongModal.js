@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 
 export default class DeleteSongModal extends Component {
     render() {
-        const { listKeyPair, deleteSongCallback, hideDeleteSongModalCallback } = this.props;
+        const { songKeyPair, deleteSongCallback, hideDeleteSongModalCallback } = this.props;
         let name = "";
-        if (listKeyPair) {
-            name = listKeyPair.name;
+        if (songKeyPair) {
+            name = songKeyPair.name;
         }
         return (
             <div 
