@@ -150,6 +150,30 @@ body {
   float:right;
 }
 
+.editModal{
+  margin-bottom:-1rem; 
+  padding-top: 0rem; 
+  padding-bottom: 0rem;
+}
+
+.editText{
+  font-weight:bold; 
+  display:inline-block; 
+  font-size:1.7rem;
+}
+
+.tid{
+  margin-left:64px;
+}
+.atid{
+  margin-left:48px;
+}
+.ytid{
+  margin-left:1rem;
+}
+
+
+
 .playlister-button, .playlister-button-disabled {
   font-size:36pt;
   border-width: 0px;

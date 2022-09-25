@@ -23,17 +23,17 @@ export default class EditSongModal extends Component {
                         <div class="modal-north">
                             Edit Song
                         </div>
-                        <div className="margin-bottom:-1rem; padding-top: 0rem; padding-bottom: 0rem;">
-                            <p className="font-weight:bold; display:inline-block; font-size:3rem"> Title: </p>
-                            <input id = "tid" className="margin-left:64px;" defaultValue={title}></input>
+                        <div className="editModal">
+                            <p className="editText"> Title: </p>
+                            <input id = "tid" className="tid" defaultValue={title}></input>
                         </div>
-                        <div className="margin-bottom:-1rem; margin-top:-1rem; padding-top: 0rem; padding-bottom: 0rem;">
-                            <p className="font-weight:bold; display:inline-block; font-size:1.7rem;"> Artist: </p>
-                            <input id = "atid" className="margin-left:48px;" defaultValue={artist}></input>
+                        <div className="editModal">
+                            <p className="editText"> Artist: </p>
+                            <input id = "atid" className="atid" defaultValue={artist}></input>
                         </div>
-                        <div className="margin-top:-1rem; padding-top: 0rem; padding-bottom: 0rem;">
-                            <p className="font-weight:bold; display:inline-block; font-size:1.7rem"> Youtube Id </p>
-                            <input id = "ytid" className="margin-left:1rem;" defaultValue={ytlink}></input>
+                        <div className="editModal">
+                            <p className="editText"> Youtube Id </p>
+                            <input id = "ytid" className="ytid" defaultValue={ytlink}></input>
                         </div>
                         <div class="modal-south">
                             <input type="button" 

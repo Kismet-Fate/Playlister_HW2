@@ -1,4 +1,4 @@
-import jsTPS_Transaction from "../../common/jsTPS.js"
+import jsTPS_Transaction from "../common/jsTPS.js"
 /**
  * MoveSong_Transaction
  * 
@@ -18,6 +18,7 @@ export default class AddSong_Transaction extends jsTPS_Transaction {
             "artist": "Unknown",
             "youTubeId": "dQw4w9WgXcQ"
         });
+        if(n);
     }
 
     doTransaction() {

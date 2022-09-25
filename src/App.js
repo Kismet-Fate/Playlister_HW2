@@ -7,9 +7,9 @@ import jsTPS from './common/jsTPS.js';
 
 // OUR TRANSACTIONS
 import AddSong_Transaction from './transactions/AddSong_Transaction.js';
-//import EditSong_Transaction from './transactions/EditSong_Transaction.js';
+import EditSong_Transaction from './transactions/EditSong_Transaction.js';
 import MoveSong_Transaction from './transactions/MoveSong_Transaction.js';
-//import RemoveSong_Transaction from './transactions/RemoveSong_Transaction.js';
+import RemoveSong_Transaction from './transactions/RemoveSong_Transaction.js';
 
 // THESE REACT COMPONENTS ARE MODALS
 import DeleteListModal from './components/DeleteListModal.js';
