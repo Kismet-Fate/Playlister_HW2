@@ -140,7 +140,7 @@ class App extends React.Component {
             currentList: newCurrentList,
             sessionData: prevState.sessionData
         }), () => {
-            
+            this.db.mutationUpdateList(this.state.currentList);
         });
     }
 
@@ -161,7 +161,7 @@ class App extends React.Component {
             currentList: newCurrentList,
             sessionData: prevState.sessionData
         }), () => {
-
+            this.db.mutationUpdateList(this.state.currentList);
         });
     }
 
@@ -389,7 +389,7 @@ class App extends React.Component {
             listKeyPairMarkedForDeletion : prevState.listKeyPairMarkedForDeletion,
             sessionData: prevState.sessionData
         }), () => {
-
+            this.db.mutationUpdateList(this.state.currentList);
         });
     }
     render() {
