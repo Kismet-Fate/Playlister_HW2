@@ -290,6 +290,7 @@ class App extends React.Component {
         });
     }
     markSongForDeletion = (keyPair) => {
+        console.log(keyPair);
         this.setState(prevState => ({
             currentList: prevState.currentList,
             songKeyPairMarkedForDeletion : keyPair,
