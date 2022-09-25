@@ -276,11 +276,23 @@ class App extends React.Component {
     markListForDeletion = (keyPair) => {
         this.setState(prevState => ({
             currentList: prevState.currentList,
+            songKeyPairMarkedForDeletion : prevState.songKeyPairMarkedForDeletion,
             listKeyPairMarkedForDeletion : keyPair,
             sessionData: prevState.sessionData
         }), () => {
             // PROMPT THE USER
             this.showDeleteListModal();
+        });
+    }
+    markSongForDeletion = (keyPair) => {
+        this.setState(prevState => ({
+            currentList: prevState.currentList,
+            songKeyPairMarkedForDeletion : keyPair,
+            listKeyPairMarkedForDeletion : null,
+            sessionData: prevState.sessionData
+        }), () => {
+            // PROMPT THE USER
+            this.showDeleteSongModal();
         });
     }
     // THIS FUNCTION SHOWS THE MODAL FOR PROMPTING THE USER
@@ -292,6 +304,15 @@ class App extends React.Component {
     // THIS FUNCTION IS FOR HIDING THE MODAL
     hideDeleteListModal() {
         let modal = document.getElementById("delete-list-modal");
+        modal.classList.remove("is-visible");
+    }
+    showDeleteSongModal() {
+        let modal = document.getElementById("delete-song-modal");
+        modal.classList.add("is-visible");
+    }
+    // THIS FUNCTION IS FOR HIDING THE MODAL
+    hideDeleteSongModal() {
+        let modal = document.getElementById("delete-song-modal");
         modal.classList.remove("is-visible");
     }
     render() {
@@ -324,7 +345,7 @@ class App extends React.Component {
                 <PlaylistCards
                     currentList={this.state.currentList}
                     moveSongCallback={this.addMoveSongTransaction} 
-                    deleteListCallback={this.markListForDeletion}
+                    deleteSongCallback={this.markSongForDeletion}
                     />
                 <Statusbar 
                     currentList={this.state.currentList} />

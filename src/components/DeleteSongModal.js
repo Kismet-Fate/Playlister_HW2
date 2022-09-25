@@ -10,7 +10,7 @@ export default class DeleteSongModal extends Component {
         return (
             <div 
                 class="modal" 
-                id="delete-list-modal" 
+                id="delete-song-modal" 
                 data-animation="slideInOutLeft">
                     <div class="modal-root" id='verify-delete-Song-root'>
                         <div class="modal-north">
