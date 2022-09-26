@@ -42,8 +42,34 @@ class App extends React.Component {
             listKeyPairMarkedForDeletion : null,
             songKeyPairMarkedForDeletion : null,
             currentList : null,
-            sessionData : loadedSessionData
+            sessionData : loadedSessionData,
+            canUndo : false,
+            canRedo : false,
+            canClose : false
         }
+    }
+    componentDidMount(){
+        //document.addEventListener('keydown', this.doUndo);
+    }
+    doUndo = (event) =>{
+        if (event.ctrlKey && event.key === 'z') {
+            this.undo();
+            this.updateToolBar();
+        }
+        if (event.ctrlKey && event.key === 'y') {
+            this.redo();
+            this.updateToolBar();
+        }
+    }
+    componentWillUnmount(){
+        //document.removeEventListener('keydown', this.doUndo);
+    }
+    updateToolBar = () =>{
+        this.setState({
+            canUndo : this.tps.hasTransactionToUndo(),
+            canRedo : this.tps.hasTransactionToRedo(),
+            canClose : this.state.currentList !== null,
+        })
     }
     sortKeyNamePairsByName = (keyNamePairs) => {
         keyNamePairs.sort((keyPair1, keyPair2) => {
@@ -144,6 +170,7 @@ class App extends React.Component {
             sessionData: prevState.sessionData
         }), () => {
             this.db.mutationUpdateList(this.state.currentList);
+            this.updateToolBar();
         });
     }
 
@@ -172,6 +199,7 @@ class App extends React.Component {
             sessionData: prevState.sessionData
         }), () => {
             this.db.mutationUpdateList(this.state.currentList);
+            this.updateToolBar();
         });
     }
 
@@ -245,10 +273,12 @@ class App extends React.Component {
             // AN AFTER EFFECT IS THAT WE NEED TO MAKE SURE
             // THE TRANSACTION STACK IS CLEARED
             this.tps.clearAllTransactions();
+            this.updateToolBar();
         });
     }
     // THIS FUNCTION BEGINS THE PROCESS OF CLOSING THE CURRENT LIST
     closeCurrentList = () => {
+        
         this.setState(prevState => ({
             listKeyPairMarkedForDeletion : prevState.listKeyPairMarkedForDeletion,
             songKeyPairMarkedForDeletion : prevState.songKeyPairMarkedForDeletion,
@@ -258,6 +288,7 @@ class App extends React.Component {
             // AN AFTER EFFECT IS THAT WE NEED TO MAKE SURE
             // THE TRANSACTION STACK IS CLEARED
             this.tps.clearAllTransactions();
+            this.updateToolBar();
         });
     }
     setStateWithUpdatedList(list) {
@@ -270,6 +301,7 @@ class App extends React.Component {
             // UPDATING THE LIST IN PERMANENT STORAGE
             // IS AN AFTER EFFECT
             this.db.mutationUpdateList(this.state.currentList);
+            this.updateToolBar();
         });
     }
     getPlaylistSize = () => {
@@ -356,6 +388,7 @@ class App extends React.Component {
         }), () => {
             // PROMPT THE USER
             this.showDeleteSongModal();
+            this.updateToolBar();
         });
     }
     markSongForEdit = (keyPair) => {
@@ -410,6 +443,7 @@ class App extends React.Component {
             sessionData: prevState.sessionData
         }), () => {
             this.db.mutationUpdateList(this.state.currentList);
+            this.updateToolBar();
         });
     }
     addDefaultSong = () =>{
@@ -426,6 +460,7 @@ class App extends React.Component {
             sessionData: prevState.sessionData
         }), () => {
             this.db.mutationUpdateList(this.state.currentList);
+            this.updateToolBar();
         });
     }
     render() {
@@ -448,9 +483,9 @@ class App extends React.Component {
                 />
                 <EditToolbar
                     canAddSong={canAddSong}
-                    canUndo={canUndo}
-                    canRedo={canRedo}
-                    canClose={canClose} 
+                    canUndo={this.state.canUndo}
+                    canRedo={this.state.canRedo}
+                    canClose={this.state.canClose} 
                     undoCallback={this.undo}
                     redoCallback={this.redo}
                     closeCallback={this.closeCurrentList}
