@@ -49,7 +49,7 @@ class App extends React.Component {
         }
     }
     componentDidMount(){
-        //document.addEventListener('keydown', this.doUndo);
+        document.addEventListener('keydown', this.doUndo);
     }
     doUndo = (event) =>{
         if (event.ctrlKey && event.key === 'z') {
@@ -62,7 +62,7 @@ class App extends React.Component {
         }
     }
     componentWillUnmount(){
-        //document.removeEventListener('keydown', this.doUndo);
+        document.removeEventListener('keydown', this.doUndo);
     }
     updateToolBar = () =>{
         this.setState({
@@ -465,9 +465,9 @@ class App extends React.Component {
     }
     render() {
         let canAddSong = this.state.currentList !== null;
-        let canUndo = this.tps.hasTransactionToUndo();
-        let canRedo = this.tps.hasTransactionToRedo();
-        let canClose = this.state.currentList !== null;
+        //let canUndo = this.tps.hasTransactionToUndo();
+        //let canRedo = this.tps.hasTransactionToRedo();
+        //let canClose = this.state.currentList !== null;
         return (
             <div id="root">
                 <Banner />
