@@ -149,15 +149,22 @@ class App extends React.Component {
 
     editSong = (key) => {
         //console.log(key);
-        let newCurrentList = this.state.currentList;
+        
         let old = {"title":this.state.songKeyPairMarkedForDeletion.song.title ,
                     "artist" : this.state.songKeyPairMarkedForDeletion.song.artist,
                     "youTubeId": this.state.songKeyPairMarkedForDeletion.song.youTubeId};
         let n = {"title":document.getElementById("tid").value,
                  "artist" : document.getElementById("atid").value,
                  "youTubeId": document.getElementById("ytid").value};
-        console.log(old);
-        newCurrentList.songs.splice(key-1, 1, n);
+        //console.log(old);
+        this.addEditSongTransaction(n, old, key);
+        //newCurrentList.songs.splice(key-1, 1, n);
+        
+    }
+
+    replaceSong = (song1, song2, index) => {
+        let newCurrentList = this.state.currentList;
+        newCurrentList.songs.splice(index-1, 1, song1);
         this.setState(prevState => ({
             listKeyPairMarkedForDeletion : prevState.listKeyPairMarkedForDeletion,
             songKeyPairMarkedForDeletion : prevState.songKeyPairMarkedForDeletion,
@@ -173,7 +180,8 @@ class App extends React.Component {
         this.hideDeleteListModal();
     }
     deleteMarkedSong = () => {
-        this.deleteSong(this.state.songKeyPairMarkedForDeletion.key);
+        //this.deleteSong(this.state.songKeyPairMarkedForDeletion.key);
+        this.addRemoveSongTransaction(this.state.songKeyPairMarkedForDeletion.song, this.state.songKeyPairMarkedForDeletion.key)
         this.hideDeleteSongModal();
     }
     editMarkedSong = () => {
@@ -296,15 +304,16 @@ class App extends React.Component {
         let transaction = new MoveSong_Transaction(this, start, end);
         this.tps.addTransaction(transaction);
     }
-    addAddSongTransaction(song, index) {
-        let transaction = new AddSong_Transaction(this, song, index);
+    addAddSongTransaction = (song, index) => {
+        //console.log(this.state.currentList.songs.length+1);
+        let transaction = new AddSong_Transaction(this, this.state.currentList.songs.length+1);
         this.tps.addTransaction(transaction);
     }
-    addEditSongTransaction(song1, song2, index) {
+    addEditSongTransaction = (song1, song2, index) =>{
         let transaction = new EditSong_Transaction(this, song1, song2, index);
         this.tps.addTransaction(transaction);
     }
-    addRemoveSongTransaction(song, index) {
+    addRemoveSongTransaction = (song, index) =>{
         let transaction = new RemoveSong_Transaction(this, song, index);
         this.tps.addTransaction(transaction);
     }
@@ -445,7 +454,7 @@ class App extends React.Component {
                     undoCallback={this.undo}
                     redoCallback={this.redo}
                     closeCallback={this.closeCurrentList}
-                    addSongCallback={this.addDefaultSong}
+                    addSongCallback={this.addAddSongTransaction}
                 />
                 <PlaylistCards
                     currentList={this.state.currentList}

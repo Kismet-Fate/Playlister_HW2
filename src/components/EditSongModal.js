@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 export default class EditSongModal extends Component {
-    
+
     render() {
         const { songKeyPair, editSongCallback, hideEditSongModalCallback } = this.props;
         let title = "";
@@ -12,8 +12,9 @@ export default class EditSongModal extends Component {
             artist = songKeyPair.song.artist;
             ytlink = songKeyPair.song.youTubeId;
         }
+        
 
-        console.log(songKeyPair);
+        //console.log(songKeyPair);
         return (
             <div 
                 class="modal" 

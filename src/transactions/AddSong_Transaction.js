@@ -9,9 +9,9 @@ import jsTPS_Transaction from "../common/jsTPS.js"
  * @author Ailun Yu
  */
 export default class AddSong_Transaction extends jsTPS_Transaction {
-    constructor(initModel,index) {
+    constructor(initApp,index) {
         super();
-        this.model = initModel;
+        this.app = initApp;
         this.index = index;
         let n = ({
             "title": "Untitled",
@@ -22,10 +22,10 @@ export default class AddSong_Transaction extends jsTPS_Transaction {
     }
 
     doTransaction() {
-        this.model.addNewSong();
+        this.app.addDefaultSong();
     }
     
     undoTransaction() {
-        this.model.removeSong(this.n, this.index);
+        this.app.deleteSong(this.index);
     }
 }
