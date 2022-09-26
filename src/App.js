@@ -462,7 +462,7 @@ class App extends React.Component {
             this.db.mutationUpdateList(this.state.currentList);
             this.updateToolBar();
         });
-    }
+    } 
     render() {
         let canAddSong = this.state.currentList !== null;
         //let canUndo = this.tps.hasTransactionToUndo();
