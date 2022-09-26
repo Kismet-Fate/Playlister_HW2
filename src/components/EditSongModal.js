@@ -1,16 +1,32 @@
 import React, { Component } from 'react';
 
 export default class EditSongModal extends Component {
+    constructor() {
+        super();
+        this.state = { 
+            title : "",
+            artist : "",
+            ytlink : "",
+        };
+    }
 
     render() {
         const { songKeyPair, editSongCallback, hideEditSongModalCallback } = this.props;
         let title = "";
         let artist = "";
         let ytlink = "";
+        //this.setState({
+        //    title : songKeyPair.song.title,
+        //    artist : songKeyPair.song.artist,
+        //    ytlink : songKeyPair.song.youTubeId,
+        //    } );
         if (songKeyPair) {
             title = songKeyPair.song.title;
             artist = songKeyPair.song.artist;
             ytlink = songKeyPair.song.youTubeId;
+            document.getElementById("tid").value = title;
+            document.getElementById("atid").value = artist;
+            document.getElementById("ytid").value = ytlink;
         }
         
 
